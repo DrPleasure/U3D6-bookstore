@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Component } from 'react'
@@ -7,8 +8,19 @@ import BookList from "./components/BookList";
 import fantasy from "./data/ListOfBooks/fantasy.json";
 
 
-function App() {
-  return (
+class App extends React.Component {
+  state = {
+      selected: null,
+  };
+
+  setSelected = (asin) => {
+      this.setState({
+          selected: asin,
+      });
+  };
+
+  render() {
+      return (
     <div className="App">
       <h1>StriveBooks!</h1>
       <Container>
@@ -21,12 +33,12 @@ function App() {
           </Col>
           <Col id="CommentSection">
             <h2>Comments Section</h2>
-            <Comments/>
+            <Comments book={this.state.selected}/>
           </Col>
         </Row>
       </Container>
     </div>
   );
 }
-
+}
 export default App;
